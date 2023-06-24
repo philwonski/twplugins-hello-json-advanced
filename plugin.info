@@ -1,0 +1,10 @@
+{
+	"title": "philwonski/twplugins-hello-json-advanced",
+	"description": "plugin boilerplate for interacting with JSON APIs (advanced version)",
+	"author": "@philwonski",
+	"version": "0.0.1",
+	"core-version": ">=5.2.4",
+	"list": "test-hangover",
+	"source": "https://github.com/philwonski/twplugins-hello-json-advanced",
+	"plugin-type": "plugin"
+}

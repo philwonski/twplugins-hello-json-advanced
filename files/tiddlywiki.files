@@ -1,0 +1,31 @@
+{
+	"tiddlers": [
+		{
+			"file": "classHeyJson.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/philwonski/twplugins-hello-json-advanced/classHeyJson.js",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ""
+		},
+		{
+			"file": "fetcher.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/philwonski/twplugins-hello-json-advanced/fetcher.js",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ""
+		},
+		{
+			"file": "../LICENSE",
+			"fields": {
+				"type": "text/plain",
+				"title": "$:/plugins/philwonski/twplugins-hello-json-advanced/LICENSE"
+			}
+		}
+	]
+}
