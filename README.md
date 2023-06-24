@@ -4,15 +4,19 @@ HelloJson-Advanced is a template for building TiddlyWiki plugins, building on th
 
 Both repos represent the same opinionated workflow for developing TiddlyWiki plugins. It's just a *file structure* with 3 levels and some style conventions. 
 
-This setup serves me well whenever I'm building alternative user interfaces for tools like Salesforce, Airtable, Quickbooks, and Wordpress.
+You can see a demo of the plugin in action [here](https://philwonski.github.io/twplugins-hello-json-advanced/#test-hangover).
 
 # Why?
+
+This setup serves me well whenever I'm building alternative user interfaces for tools like Salesforce, Airtable, Quickbooks, and Wordpress.
 
 Please see the [HelloJson](https://github.com/philwonski/twplugins-hello-json) repo for a more detailed explanation of the motivation behind this approach. This Advanced repo is intended to get you right into hard examples.
 
 # How?
 
-Refer again to the [HelloJson](https://github.com/philwonski/twplugins-hello-json) repo for a brief explanation of how to leverage ChatGPT to supercharge your own development of plugins in this style.
+Refer again to the [HelloJson](https://github.com/philwonski/twplugins-hello-json) repo for a brief explanation of how to I leverage ChatGPT and NPM packages to supercharge my own development of plugins in this style.
+
+Over time I will add examples to this and related repos so folks can have working demos to get started.
 
 In short, the basic structure starts with just 3 files:
 
@@ -24,15 +28,15 @@ In short, the basic structure starts with just 3 files:
 
 This repo is intended to house various examples of bringing cool helpers and libraries into TiddlyWiki to do different stuff. 
 
-In comparing it to the basic repo, a good place to start is the "hangover" command used in the basic repo. Note how in this repo:
+In comparing it to the basic repo, a good place to start is the "hangover" command featured in the basic repo. Note how in this advanced repo:
 
 1. The `hangover` command no longer lives in the EXECUTE function block of the main plugin file `hj.js`. Instead, it lives in the INVOKE block, meaning it gets invoked on an action in the frontend... In this case the frontend action is a button you can click when viewing the `test-hangover` tiddler. 
 
 2. The `hangover` command accepts two different days as params, allowing you to compare the number of views for the Hangover wikipedia page on two different days.
 
-3. The code for calling the `hangover` command in `hj.js` is much shorter now: we've abstracted the code for calling the hangover command into a method called `runFetchHangoverCompare` in our class file, `classHeyJson.js`. 
+3. The code for calling the `hangover` command in `hj.js` is much shorter now: that's because we've abstracted the code for calling the hangover command into a method called `runFetchHangoverCompare` in our class file, `classHeyJson.js`. That's the idea here, to keep the main plugin file clean and simple, and to do all the logic in the class file (and the helpers backing up the class file to keep that neat, too).
 
-4. **DO YOU BELIEVE IN MAGIC?** Note how the `runFetchHangoverCompare` method calls another method in the class called `twMakeTid`. This is where things really start to get interesting: instead of just displaying text like the basic hello-json widget, now we are actually calling upon TiddlyWiki functionality and creating a tiddler. This opens up a world of possibilities for ingesting remote data into TiddlyWiki and doing things with it. 
+4. **DO YOU BELIEVE IN MAGIC?** Note how the `runFetchHangoverCompare` method in the class file `files/classHeyJson.coffee` calls another method in the class called `twMakeTid`. This is where things really start to get interesting: instead of just displaying text like the basic hello-json widget, now we are actually calling upon TiddlyWiki functionality and creating a tiddler. This opens up a world of possibilities for ingesting remote data into TiddlyWiki and doing things with it. 
 
 # Usage
 
@@ -57,9 +61,13 @@ So the top of my file `TWdev/TW5/editions/empty/tiddlywiki.info` now looks like 
 {
 	"description": "Empty edition",
 	"plugins": [
-		"philwonski/twplugins-hello-json"
+		"philwonski/twplugins-hello-json-advanced"
 	],
-    
+
 ```
 
-And I can generate a static html version of the wiki with my plugin included by running this command in the TW5 folder: `node ./tiddlywiki.js editions/empty --build index` and then opening the file `TWdev/TW5/editions/empty/output/index.html#heyJay-test` in my browser.
+And I can generate a static html version of the wiki with my plugin included by running this command in the TW5 folder: `node ./tiddlywiki.js editions/empty --build index` and then opening the file `TWdev/TW5/editions/empty/output/index.html#test-hangover` in my browser.
+
+## Coffeescript
+
+Make fun of me all you want, I get a ton of mileage out of Coffeescript for all types of javascript dev. I use VSCode and the "CoffeeScript Preview" plugin by Drew Barrett. I just write my code in Coffeescript and then compile it to javascript with a single command `coffee -c classHeyJson.coffee` from the /files folder.
