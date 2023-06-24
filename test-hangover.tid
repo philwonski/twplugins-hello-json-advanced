@@ -4,10 +4,28 @@ modified: 20230622164533333
 tags: example
 type: text/vnd.tiddlywiki
 
+!! Example
+
+Inside the button widget below, I am invoking the hello-json widget with the command "hangover," as well as specifying two dates to compare. 
+
+```
+<$button>Test Button (Hangover):
+<$hellojson command="hangover" day1="20200101" day2="20230101"/>
+</$button>
+```
+
+The hangover command calls the free Wikipedia JSON API to get the number of views of the article "Hangover" on the dates specified.
+
+The hangover command always creates the tiddler called "HangoverCompare" to store the data. We can also make the name a variable, such as for batch importing/creating.
+
+I display the results by transcluding the tiddler called "HangoverCompare" with `{{HangoverCompare}}`.
+
 <!--🍔 The test button will create a new Tiddler called HangoverCompare 🍔-->
 <$button>Test Button (Hangover):
 <$hellojson command="hangover" day1="20200101" day2="20230101"/>
 </$button>
+
+<hr>
 
 <!--🍟 Show the results by transcluding HangoverCompare 🍟-->
 {{HangoverCompare}}
