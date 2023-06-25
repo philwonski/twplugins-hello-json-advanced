@@ -1,6 +1,6 @@
 # HelloJson-Advanced
 
-HelloJson-Advanced is a template for building TiddlyWiki plugins, building on the basic concepts of the [HelloJson](https://github.com/philwonski/twplugins-hello-json) repo.
+HelloJson-Advanced is a template for creating TiddlyWiki plugins, building on the basic concepts of the [HelloJson](https://github.com/philwonski/twplugins-hello-json) repo.
 
 Both repos represent the same opinionated workflow for developing TiddlyWiki plugins. It's just a *file structure* with 3 levels and some style conventions. 
 
@@ -30,15 +30,15 @@ This repo is intended to house various examples of bringing cool helpers and lib
 
 In comparing it to the basic repo, a good place to start is the "hangover" command featured in the basic repo. See it in action [in the basic repo here](https://philwonski.github.io/twplugins-hello-json/#heyJay-test) vs [in this advanced repo here](https://philwonski.github.io/twplugins-hello-json-advanced/#test-hangover). 
 
-Back in the code, note how in this advanced repo:
+Back in the code, note some new stuff here in the advanced repo:
 
-1. The actions of the `hangover` command no longer live in the EXECUTE function block of the main plugin file `hj.js`. Instead, the hangover steps live in the INVOKE block, meaning the steps get invoked on an action in the frontend... In this case the frontend action is a button you can click when viewing the `test-hangover` tiddler in the demo. 
+1. **THE BUTTON:** The actions of the `hangover` command no longer live in the EXECUTE function block of the main plugin file `hj.js`. Instead, the hangover steps live in the INVOKE block, meaning the steps get invoked on an action in the frontend... In this case the frontend action is a button you can click when viewing the `test-hangover` tiddler in the demo. 
 
-2. The `hangover` command accepts two different days as params now, `<$hellojson command="hangover" day1="20200101" day2="20230101"/>`, allowing you to compare the number of views for the Hangover wikipedia page on two different days.
+2. **THE PARAMS:** The `hangover` command accepts two different days as params now, `<$hellojson command="hangover" day1="20200101" day2="20230101"/>`, allowing you to compare the number of views for the Hangover wikipedia page on two different days.
 
-3. The code running the `hangover` command in `hj.js` is much shorter now: that's because we've abstracted the code for doing that little routine into a method of the HeyJson class called `runFetchHangoverCompare`. That's the idea here: A) keep the main plugin file clean and simple by abstracting business logic to the class file; B) keep the class file neat and human-readable by using coffeescript and by abstracting harder stuff into helper files required by the class.
+3. **THE STYLE:** The code running the `hangover` command in `hj.js` is much shorter now: that's because we've abstracted the code for doing that little routine into a method of the HeyJson class called `runFetchHangoverCompare`. That's the idea here: A) keep the main plugin file clean and simple by abstracting business logic to the class file; B) keep the class file neat and human-readable by using coffeescript and by abstracting harder stuff into helper files required by the class.
 
-4. **DO YOU BELIEVE IN MAGIC?** Open `files/classHeyJson.coffee`. Note how elegantly the `runFetchHangoverCompare` method calls another method in the class called `twMakeTid`. This is where things really start to get interesting: instead of just displaying text like the basic hello-json widget, now we are actually calling upon TiddlyWiki functionality and creating a tiddler in our wiki. This opens up a world of possibilities for ingesting remote data into TiddlyWiki and doing things with it. 
+4. **THE MAGIC:** Open `files/classHeyJson.coffee`. Note how elegantly the `runFetchHangoverCompare` method calls another method in the class called `twMakeTid`. This is where things really start to get interesting: instead of just displaying text like the basic hello-json widget, now we are actually calling upon TiddlyWiki functionality and creating a tiddler in our wiki. **This opens up a world of possibilities for ingesting remote data into TiddlyWiki and doing things with it.** 
 
 # Usage
 
