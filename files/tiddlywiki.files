@@ -21,6 +21,16 @@
 			"suffix": ""
 		},
 		{
+			"file": "wpapi.js",
+			"fields": {
+				"type": "application/javascript",
+				"title": "$:/plugins/philwonski/twplugins-hello-json-advanced/wpapi.js",
+				"module-type": "library"
+			},
+			"prefix": "",
+			"suffix": ""
+		},
+		{
 			"file": "../LICENSE",
 			"fields": {
 				"type": "text/plain",

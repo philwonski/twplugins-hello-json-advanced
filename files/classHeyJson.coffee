@@ -1,4 +1,5 @@
 fetchJson = require('./fetcher.js')
+WPAPI = require('./wpapi.js')
 
 class HeyJson
     constructor: (@hey = {}) ->
@@ -45,22 +46,38 @@ class HeyJson
             console.log(e)
             return "error fetching json in runFetch method"
     
-    twFilter: (filter) =>
+    runFetchWpPosts: (wpsite) =>
+
+        endpoint = "https://" + wpsite + "/wp-json/"
+        namespace = 'wp/v2'
+        postRoute = '/posts/(?P<id>)'
+        site = new WPAPI({endpoint: endpoint})
+        site.post = site.registerRoute(namespace, postRoute)
+
         try
-            f = await $tw.wiki.filterTiddlers(filter)
-            return f
+            posts = await site.post().perPage( 5 ).page( 1 ).get()
+            # console.log(JSON.stringify(posts))
+            importer = (x) =>
+                wptitle = "import-" + x.id
+                wplink = x.link
+                wptext = JSON.stringify(x)
+                title = x.title.rendered
+                body = x.content.rendered
+                return $tw.wiki.addTiddler({
+                    title: wptitle,
+                    text: wptext,
+                    type: "application/json",
+                    tags: "wpPost",
+                    wplink: wplink
+                  })
+            
+            for post in posts
+                await importer(post)
+
+            return "got posts"
         catch e
             console.log(e)
-            return "error filtering tiddlers in twFilter method"
-    
-    twAddtid: (tid) =>
-        try
-            await $tw.wiki.addTiddler(tid)
-            return "added tiddler"
-        catch e
-            console.log(e)
-            return "error adding tiddler in twAddtid method"
-    
+            return "error fetching wp posts in runFetchWpPosts method"
     
     runMsg: =>
         msg = "hello there"
