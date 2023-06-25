@@ -31,7 +31,7 @@ Below the line, I display the results using the list widget. I filter for the ta
 <$list filter="[tag[wpPost]]">
 <div style="width:100%; padding: 2.5%; margin: 1.5%; border: 1px solid grey;">
 
-<div style="width:25%; float:left;">
+<div style="width:25%; float:left; margin-right: 1.5%">
 <img width="165px" src={{{ [{!!text}jsonget[yoast_head_json],[og_image],[0],[url]] }}} >
 </div>
 
