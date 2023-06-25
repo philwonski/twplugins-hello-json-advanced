@@ -18,10 +18,10 @@ The hangover command calls the free Wikipedia JSON API to get the number of view
 
 The hangover command always creates the tiddler called "HangoverCompare" to store the data. We can also make the name a variable, such as for batch importing/creating.
 
-I display the results by transcluding the tiddler called "HangoverCompare" with `{{HangoverCompare}}`.
+Below the line, I display the results by transcluding the tiddler called "HangoverCompare" with `{{HangoverCompare}}`. To see different dates you can edit this tiddler (pencil icon), save it and click the button again.
 
 <!--🍔 The test button will create a new Tiddler called HangoverCompare 🍔-->
-<$button>Test Button (Hangover):
+<$button>Test Button (click me):
 <$hellojson command="hangover" day1="20200101" day2="20230101"/>
 </$button>
 
