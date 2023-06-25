@@ -73,3 +73,51 @@ And I can generate a static html version of the wiki, with my plugin included, b
 ## Coffeescript
 
 Make fun of me all you want, I get a ton of mileage out of Coffeescript for all types of javascript dev. I use VSCode and the "CoffeeScript Preview" plugin by Drew Barrett. I just write my code in Coffeescript and then compile it to javascript with a single command `coffee -c classHeyJson.coffee` from the /files folder.
+
+# EXAMPLES
+
+## 1. Hangover
+
+*Purpose*
+
+Compare the number of views for the Hangover wikipedia page on two different days.
+
+*Usage*
+
+`<$hellojson command="hangover" day1="20200101" day2="20230101"/>`
+
+*Demo*
+
+[https://philwonski.github.io/twplugins-hello-json-advanced/#test-hangover](https://philwonski.github.io/twplugins-hello-json-advanced/#test-hangover)
+
+## 2. WPAPI (aka Wordpress Remote)
+
+*Purpose*
+
+Interact with a remote Wordpress site using the built-in Wordpress REST API (no Wordpress plugins needed). 
+
+This example greatly reduces the code required to interact with a Wordpress site and database, giving you the ability to build alternative backends for Wordpress sites using TiddlyWiki; or, alternatively, to build alternative backends for TiddlyWiki sites using headless Wordpress!
+
+Getting posts in the main plugin file is as simple as calling a special method in the class file: `runFetchWpPosts()`.
+
+```
+if (ACTION == "getposts") {
+        var heyJson = new HeyJson();
+        await heyJson.runFetchWpPosts(WPsite);
+        var msg = "got posts, check for new tiddlers with post id in title";
+      }
+```
+
+In the heyJson class file, the `runFetchWpPosts` method just *requires*, *initiates* and *awaits* the minified [WPAPI NPM library](https://www.npmjs.com/package/wpapi).
+
+```
+posts = await site.post().perPage( 5 ).page( 1 ).get() // BOOM
+```
+
+*Usage*
+
+`<$hellojson command="wpapi" wpaction="getposts" wpsite="mydigitalmark.com"/>`
+
+*Demo*
+
+[https://philwonski.github.io/twplugins-hello-json-advanced/#test-wpapi](https://philwonski.github.io/twplugins-hello-json-advanced/#test-wpapi)

@@ -60,6 +60,13 @@ helloJson widget
         this.day2 = this.getAttribute("day2");
         var instructions = `testing ${this.COMMAND} command...`;
       }
+
+      else if (this.COMMAND == "wpapi") {
+        // command="hangover" params: day1, day2
+        this.wpaction = this.getAttribute("wpaction");
+        this.wpsite = this.getAttribute("wpsite");
+        var instructions = `testing ${this.COMMAND} on ${this.wpsite}...`;
+      }
       
       return instructions;
 };
@@ -80,10 +87,11 @@ helloJson widget
 
   MyWidget.prototype.invokeAction = async function(triggeringWidget,event) {
       var COMMAND = this.COMMAND;
-    // ******************************************************************************** //
+
+      if (COMMAND == "hangover") {
+      // ******************************************************************************** //
       //  EXAMPLE- HANGOVER: get Json from wikipedia and return some info from inside it
       // ******************************************************************************** //
-      if (COMMAND == "hangover") {
         // Find out how many people looked at the english wikipedia page for Hangover on a given day
         // use in your wiki like <$hellojson command="hangover"/>
         // We only need one method of the HeyJson class to get this info:
@@ -104,6 +112,25 @@ helloJson widget
 
       return createTid;
 
+  } else if (COMMAND == "wpapi") {
+      // ******************************************************************************** //
+      //  EXAMPLE- WPAPI: interact with a Wordpress Website, no WP plugins needed
+      // ******************************************************************************** //
+
+      var ACTION = this.wpaction;
+      var WPsite = this.wpsite;
+      // var CREDS = this.wiki.getTiddler('wp_creds');
+
+      // <$hellojson command="wpapi" wpaction="getposts"/>
+
+      if (ACTION == "getposts") {
+        var heyJson = new HeyJson();
+        await heyJson.runFetchWpPosts(WPsite);
+        var msg = "got posts, check for new tiddlers with post id in title";
+      }
+
+    return console.log(msg);
+  
   } else if (COMMAND == "test" || COMMAND == "hello" || COMMAND == undefined || COMMAND == "") {
     var reply = "Hello, World! The plugin is installed.";
     return reply;
