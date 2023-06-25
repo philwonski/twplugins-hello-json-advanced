@@ -80,7 +80,7 @@ Make fun of me all you want, I get a ton of mileage out of Coffeescript for all 
 
 *Purpose*
 
-Compare the number of views for the Hangover wikipedia page on two different days.
+Compare the number of views for the Hangover wikipedia page on two different days. This is a simple example that builds on the basic [HelloJson](https://github.com/philwonski/twplugins-hello-json) plugin upon which this repo is based.
 
 *Usage*
 
@@ -96,9 +96,9 @@ Compare the number of views for the Hangover wikipedia page on two different day
 
 Interact with a remote Wordpress site using the built-in Wordpress REST API (no Wordpress plugins needed). 
 
-This example greatly reduces the code required to interact with a Wordpress site and database, giving you the ability to build alternative backends for Wordpress sites using TiddlyWiki; or, alternatively, to build alternative backends for TiddlyWiki sites using headless Wordpress!
+This example greatly reduces the code required to interact with a Wordpress site and database, giving you the ability to build alternative backends for Wordpress sites using TiddlyWiki; or to build alternative backends for *TiddlyWiki* sites using headless Wordpress! 🤯
 
-Getting posts in the main plugin file is as simple as calling a special method in the class file: `runFetchWpPosts()`.
+Getting posts in the main plugin file is as simple as calling a special method in the class file: `runFetchWpPosts()`. That method is preset to grab 5 posts from page 1 and load each post into your wiki as a tiddler. Nice.
 
 ```
 if (ACTION == "getposts") {
