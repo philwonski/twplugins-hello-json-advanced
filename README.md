@@ -4,7 +4,7 @@ HelloJson-Advanced is a template for creating TiddlyWiki plugins, building on th
 
 Both repos represent the same opinionated workflow for developing TiddlyWiki plugins. It's just a *file structure* with 3 levels and some style conventions. 
 
-You can see a demo of the adanced plugin in action [here](https://philwonski.github.io/twplugins-hello-json-advanced/#test-hangover).
+You can see a demo of the adanced plugin in action [here](https://philwonski.github.io/twplugins-hello-json-advanced/#test-hangover). Jump to the [Examples](#examples) section below to see some of the cool possibilities.
 
 # Why?
 
