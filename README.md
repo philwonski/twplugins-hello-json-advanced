@@ -98,6 +98,8 @@ Interact with a remote Wordpress site using the built-in Wordpress REST API (no 
 
 *Usage*
 
+You can put most any wordpress site in the `wpsite` param, but the site must have the Wordpress REST API enabled.
+
 `<$hellojson command="wpapi" wpaction="getposts" wpsite="mydigitalmark.com"/>`
 
 *Demo*
