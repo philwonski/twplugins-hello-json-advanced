@@ -22,7 +22,7 @@ In short, the basic structure starts with just 3 files:
 
 1. `hj.js` - the main plugin file that's (almost) straight from the TiddlyWiki plugin boilerplate 
 2. `classHeyJson.js` - required inside the `hj.js` file, it has the cool methods like `fetch(url)`
-3. `fetcher.js` - our first helper file, which abstracts a GET request and keeps the class file clean
+3. `helper-fetcher.js` - our first helper file, which abstracts a GET request and keeps the class file clean
 
 # This Repo
 

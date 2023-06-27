@@ -11,20 +11,20 @@
 			"suffix": ""
 		},
 		{
-			"file": "fetcher.js",
+			"file": "helper-fetcher.js",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/plugins/philwonski/twplugins-hello-json-advanced/fetcher.js",
+				"title": "$:/plugins/philwonski/twplugins-hello-json-advanced/helper-fetcher.js",
 				"module-type": "library"
 			},
 			"prefix": "",
 			"suffix": ""
 		},
 		{
-			"file": "wpapi.js",
+			"file": "helper-wpapi.js",
 			"fields": {
 				"type": "application/javascript",
-				"title": "$:/plugins/philwonski/twplugins-hello-json-advanced/wpapi.js",
+				"title": "$:/plugins/philwonski/twplugins-hello-json-advanced/helper-wpapi.js",
 				"module-type": "library"
 			},
 			"prefix": "",

@@ -1,5 +1,5 @@
-fetchJson = require('./fetcher.js')
-WPAPI = require('./wpapi.js')
+fetchJson = require('./helper-fetcher.js')
+WPAPI = require('./helper-wpapi.js')
 
 class HeyJson
     constructor: (@hey = {}) ->

@@ -2,9 +2,9 @@
 (function() {
   var HeyJson, WPAPI, fetchJson;
 
-  fetchJson = require('./fetcher.js');
+  fetchJson = require('./helper-fetcher.js');
 
-  WPAPI = require('./wpapi.js');
+  WPAPI = require('./helper-wpapi.js');
 
   HeyJson = class HeyJson {
     constructor(hey = {}) {
@@ -13,6 +13,7 @@
       this.twMakeTid = this.twMakeTid.bind(this);
       this.runFetch = this.runFetch.bind(this);
       this.runFetchWpPosts = this.runFetchWpPosts.bind(this);
+      this.sendTidsByFilter = this.sendTidsByFilter.bind(this);
       this.runMsg = this.runMsg.bind(this);
       this.hey = hey;
     }
@@ -110,6 +111,22 @@
         e = error;
         console.log(e);
         return "error fetching wp posts in runFetchWpPosts method";
+      }
+    }
+
+    async sendTidsByFilter(filter) {
+      var e, i, len, tid, tids;
+      try {
+        tids = $tw.wiki.filterTiddlers(filter);
+        for (i = 0, len = tids.length; i < len; i++) {
+          tid = tids[i];
+          await $tw.wiki.sendTiddler(tid);
+        }
+        return "success";
+      } catch (error) {
+        e = error;
+        console.log(e);
+        return "error sending tiddlers by filter in sendTidsByFilter method";
       }
     }
 
