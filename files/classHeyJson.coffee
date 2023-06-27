@@ -79,6 +79,16 @@ class HeyJson
             console.log(e)
             return "error fetching wp posts in runFetchWpPosts method"
     
+    sendTidsByFilter: (filter) =>
+        try
+            tids = $tw.wiki.filterTiddlers(filter)
+            for tid in tids
+                await $tw.wiki.sendTiddler(tid)
+            return "success"
+        catch e
+            console.log(e)
+            return "error sending tiddlers by filter in sendTidsByFilter method"
+    
     runMsg: =>
         msg = "hello there"
         return msg

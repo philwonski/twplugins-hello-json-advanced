@@ -1,6 +1,6 @@
 # HelloJson-Advanced
 
-HelloJson-Advanced is a template for creating TiddlyWiki plugins, building on the basic concepts of the [HelloJson](https://github.com/philwonski/twplugins-hello-json) repo.
+HelloJson-Advanced is a template for creating [TiddlyWiki](https://tiddlywiki.com) plugins, building on the basic concepts of the [HelloJson](https://github.com/philwonski/twplugins-hello-json) repo.
 
 Both repos represent the same opinionated workflow for developing TiddlyWiki plugins. It's just a *file structure* with 3 levels and some style conventions. 
 
@@ -40,7 +40,7 @@ Back in the code, note some new stuff the Hangover command has here in the advan
 
 4. **THE MAGIC:** Open `files/classHeyJson.coffee`. Note how elegantly the `runFetchHangoverCompare` method calls another method in the class called `twMakeTid`. This is where things really start to get interesting: instead of just displaying text like the basic hello-json widget, now we are actually calling upon TiddlyWiki functionality and creating a tiddler in our wiki. **This opens up a world of possibilities for ingesting remote data into TiddlyWiki and doing things with it.** 
 
-# Usage
+# Setup & Usage
 
 I set up my dev environment exactly like the instructions here: 
 
@@ -69,6 +69,8 @@ So the top of my file `TWdev/TW5/editions/empty/tiddlywiki.info` now looks like 
 ```
 
 And I can generate a static html version of the wiki, with my plugin included, by running this command in the TW5 folder: `node ./tiddlywiki.js editions/empty --build index` and then opening the file `...TWdev/TW5/editions/empty/output/index.html#test-hangover` in my browser.
+
+If you modify the class file, remember to compile the updated javascript file with `coffee -c classHeyJson.coffee` from the /files folder.
 
 ## Coffeescript
 
@@ -108,9 +110,9 @@ You can put most any wordpress site in the `wpsite` param, but the site must hav
 
 *More Info*
 
-This example greatly reduces the code required to interact with a Wordpress site and database, giving you the ability to build alternative backends for Wordpress sites using TiddlyWiki; or to build alternative backends for *TiddlyWiki* sites using headless Wordpress! 🤯
+This example greatly reduces the code required to interact with a Wordpress site and database. It gives you the ability to build alternative backends for Wordpress sites using TiddlyWiki; or, on the other hand, you could also use it to build backends for *TiddlyWiki* sites using headless Wordpress. 🤯
 
-Getting posts in the main plugin file is as simple as calling a special method in the class file: `runFetchWpPosts()`. That method is preset to grab 5 posts from page 1 and load each post into your wiki as a tiddler. Nice.
+Getting posts in the main plugin file is as simple as calling a special method in the class file: `runFetchWpPosts()`. That method is pre-set to grab 5 posts from page 1 and load each post into your wiki as a tiddler. Nice.
 
 ```
 // from the main plugin file hj.js
@@ -122,8 +124,10 @@ if (ACTION == "getposts") {
       }
 ```
 
-In the HeyJson class file, the `runFetchWpPosts` method just *requires*, *initiates* and *awaits* the minified [WPAPI NPM library](https://www.npmjs.com/package/wpapi) like this:
+The HeyJson class file and its `runFetchWpPosts` method just *require*, *initiate* and *await* the minified [WPAPI NPM library](https://www.npmjs.com/package/wpapi). This way, all the NPM library methods are available to you in the class file and you can do things like this:
 
 ```
-posts = await site.post().perPage( 5 ).page( 1 ).get() // BOOM
+posts = await site.post().perPage( 5 ).page( 1 ).get()
 ```
+
+BOOM!
