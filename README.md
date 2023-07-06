@@ -14,7 +14,7 @@ Please see the [HelloJson](https://github.com/philwonski/twplugins-hello-json) r
 
 # How?
 
-Refer again to the [HelloJson](https://github.com/philwonski/twplugins-hello-json) repo for a brief explanation of how to I leverage ChatGPT and NPM packages to supercharge my own development of all kinds of plugins using this structure.
+Refer again to the [HelloJson](https://github.com/philwonski/twplugins-hello-json) repo for a brief explanation of how I leverage ChatGPT and NPM packages to supercharge my own development of all kinds of plugins using this structure.
 
 Over time I will add examples to this and related repos so folks can have working demos to get started.
 
@@ -148,6 +148,8 @@ For sending JSON tids out to a remote endpoint.
 
 *More Info*
 
-Inspired by [OokTech](https://github.com/OokTech), this example grabs tiddlers by the user-provided filter. It sends them out as JSON to your URL. Importantly, it also updates the tiddlers that were sent, marking the field "SENTyn" to "yes." 
+Inspired by [OokTech](https://github.com/OokTech), this example grabs tiddlers by the user-provided filter, and sends them out as JSON to your URL. Importantly, it also updates the tiddlers that were sent, marking the field "SENTyn" to "yes." 
 
-Thanks to OokTech I have been using this approach successfully for 2 years to POST data out of TiddlyWiki to remote servers... usually I just use a single-file js macro a la [this gist](https://gist.github.com/philwonski/1a015b555ac8b858c2949d7940ca8880) ... I have slapped it into the HelloJson repo for convenience. Note that if you send a shadow tiddler with your filter (as I have with my filter `[tag[example]]`, which are all shadows), you won't see the update to the tiddler's SENTyn field. You may not notice this since you have to open the tiddler (and thus make it non-shadow) to add your own endpoint. 
+Thanks to OokTech I have been using this approach successfully for 2 years to POST data out of TiddlyWiki to remote servers... usually I just use a single-file js macro a la [this gist](https://gist.github.com/philwonski/1a015b555ac8b858c2949d7940ca8880) ... I have slapped it into the HelloJson repo for convenience. 
+
+Note that if you send a shadow tiddler with your filter (as I have with my filter `[tag[example]]`, which are all shadows), you won't see the update to the tiddler's SENTyn field. You may not notice this since you have to open the tiddler (and thus make it non-shadow) to add your own endpoint. 
