@@ -1,0 +1,29 @@
+title: test-sendtids
+created: 20230629164533000
+modified: 20230705164533333
+tags: example
+type: text/vnd.tiddlywiki
+
+!! Example
+
+Send tids tagged "example" to the server.
+
+<a href="http://pipedream.com/?via=phil">Pipedream.com</a> is my favorite place for creating endpoints. (Phil's link)
+
+''You need to open this tid and provide your own endpoint URL in the test button below.''
+
+```
+<$button>Test Button (sendtids):
+<$hellojson command="sendtids" filter="[tag[example]]" url="https://YOUR_ENDPOINT_HERE"/>
+</$button>
+```
+
+<!--🍔 The test button will create a new Tiddler called HangoverCompare 🍔-->
+<$button>Test Button (updatetids):
+<$hellojson command="sendtids" filter="[tag[example]]" url="https://YOUR_ENDPOINT_HERE"/>
+</$button>
+
+<hr>
+
+<!--🍟 Show the results by transcluding the SENTyn field of tids tagged "example" 🍟-->
+<$list filter="[tag[example]]">{{!!title}}: Sent? {{!!SENTyn}}<br> </$list>

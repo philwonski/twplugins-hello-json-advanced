@@ -13,6 +13,7 @@
       this.twMakeTid = this.twMakeTid.bind(this);
       this.runFetch = this.runFetch.bind(this);
       this.runFetchWpPosts = this.runFetchWpPosts.bind(this);
+      this.tidsByFilter = this.tidsByFilter.bind(this);
       this.sendTidsByFilter = this.sendTidsByFilter.bind(this);
       this.runMsg = this.runMsg.bind(this);
       this.hey = hey;
@@ -114,15 +115,56 @@
       }
     }
 
-    async sendTidsByFilter(filter) {
-      var e, i, len, tid, tids;
+    tidsByFilter(filter) {
+      var e, tids;
+      $tw.wiki.filterTiddlers(TEST_TIDDLER_FILTER);
       try {
         tids = $tw.wiki.filterTiddlers(filter);
-        for (i = 0, len = tids.length; i < len; i++) {
-          tid = tids[i];
-          await $tw.wiki.sendTiddler(tid);
-        }
-        return "success";
+        return tids;
+      } catch (error) {
+        e = error;
+        console.log(e);
+        return "error getting tiddlers by filter in tidsByFilter method";
+      }
+    }
+
+    sendTidsByFilter(url, tids) {
+      var access_tid, e, formRequest, payload, these_tids, tid_objs;
+      these_tids = tids;
+      
+      // funtion to access tid object by title from these_tids
+      access_tid = function(tid) {
+        var tidobj, tidobj_big;
+        console.log('accessing tid ' + tid + ' ...');
+        tidobj_big = $tw.wiki.getTiddler(tid);
+        // console.log(JSON.stringify(tidobj_big));
+        tidobj = tidobj_big.fields;
+        //console.dir(tidobj);
+        return tidobj;
+      };
+      tid_objs = these_tids.map(access_tid);
+      payload = JSON.stringify(tid_objs);
+      url = url;
+      try {
+        formRequest = new XMLHttpRequest();
+        formRequest.open('POST', url, true);
+        formRequest.setRequestHeader('content-type', 'application/json');
+        formRequest.setRequestHeader('X-API-Key', '123456');
+        formRequest.send(payload);
+        return formRequest.onreadystatechange = function() {
+          var i, j, len, len1, tid;
+          if (formRequest.readyState === 4 && formRequest.status === 200) {
+            for (i = 0, len = these_tids.length; i < len; i++) {
+              tid = these_tids[i];
+              $tw.wiki.setText(tid, "SENTyn", "", "yes");
+            }
+          } else {
+            for (j = 0, len1 = these_tids.length; j < len1; j++) {
+              tid = these_tids[j];
+              $tw.wiki.setText(tid, "SENTyn", "", "no");
+            }
+          }
+        };
       } catch (error) {
         e = error;
         console.log(e);
@@ -132,6 +174,7 @@
 
     runMsg() {
       var msg;
+      // just a test method
       msg = "hello there";
       return msg;
     }

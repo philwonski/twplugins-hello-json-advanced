@@ -67,6 +67,13 @@ helloJson widget
         this.wpsite = this.getAttribute("wpsite");
         var instructions = `testing ${this.COMMAND} on ${this.wpsite}...`;
       }
+
+      else if (this.COMMAND == "sendtids") {
+        // command="sendtids" params: filter, url
+        this.filt = this.getAttribute("filter");
+        this.url = this.getAttribute("url");
+        var instructions = `testing ${this.COMMAND} check SENTyn field in the tids you filtered for...`;
+      }
       
       return instructions;
 };
@@ -131,7 +138,25 @@ helloJson widget
 
     return console.log(msg);
   
-  } else if (COMMAND == "test" || COMMAND == "hello" || COMMAND == undefined || COMMAND == "") {
+  }
+        // ******************************************************************************** //
+      //  EXAMPLE- SENDTIDS: send tiddlers (from filter) to a remote endpoint as json
+      // ******************************************************************************** //
+  
+  else if (COMMAND == "sendtids") {
+      var FILT = this.filt;
+      var URL = this.url;
+      var these_tids = $tw.wiki.filterTiddlers(FILT);
+      console.dir(these_tids);
+      
+      var heyJson = new HeyJson();
+      await heyJson.sendTidsByFilter(URL, these_tids);
+      var msg = "sent tids, check remote endpoint";
+      return msg
+  } 
+  // END OF EXAMPLES // 
+   /// CATCH TEST COMMAND TO CONFIRM PLUGIN IS INSTALLED // 
+    else if (COMMAND == "test" || COMMAND == "hello" || COMMAND == undefined || COMMAND == "") {
     var reply = "Hello, World! The plugin is installed.";
     return reply;
   } 

@@ -131,3 +131,23 @@ posts = await site.post().perPage( 5 ).page( 1 ).get()
 ```
 
 BOOM!
+
+## 3. SendTids
+
+*Purpose*
+
+For sending JSON tids out to a remote endpoint. 
+
+*Usage*
+
+`<$hellojson command="sendtids" endpoint="https://myendpoint.com" filter="[tag[example]]"/>`
+
+*Demo*
+
+[https://philwonski.github.io/twplugins-hello-json-advanced/#test-sendtids](https://philwonski.github.io/twplugins-hello-json-advanced/#test-sendtids)
+
+*More Info*
+
+Inspired by [OokTech](https://github.com/OokTech), this example grabs tiddler by the user-provided filter. It sends them out as JSON to your URL. Importantly, it also updates the tiddlers that were sent, marking the field "SENTyn" to "yes." 
+
+Thanks to OokTech I have been using this approach successfully for 2 years to POST data out of TiddlyWiki to remote servers... usually I just use a single-file js macro a la [this gist](https://gist.github.com/philwonski/1a015b555ac8b858c2949d7940ca8880) ... I have slapped it into the HelloJson repo for convenience. Note that if you send a shadow tiddler with your filter (as I have with my filter `[tag[example]]`, which are all shadows), you won't see the update to the tiddler's SENTyn field. You may not notice this since you have to open the tiddler (and thus make it non-shadow) to add your own endpoint. 
