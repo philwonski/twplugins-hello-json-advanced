@@ -96,7 +96,7 @@ Compare the number of views for the Hangover wikipedia page on two different day
 
 *Purpose*
 
-Interact with a remote Wordpress site using the built-in Wordpress REST API (no Wordpress plugins needed). 
+Interact with a remote Wordpress site using the built-in Wordpress REST API (no Wordpress plugins needed). This concept is forked and expanded-upon in [TW5-Wordpress-Remote](https://github.com/philwonski/TW5-Wordpress-Remote)
 
 *Usage*
 
