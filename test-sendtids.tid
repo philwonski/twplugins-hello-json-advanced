@@ -18,8 +18,8 @@ Send tids tagged "example" to the server.
 </$button>
 ```
 
-<!--🍔 The test button will create a new Tiddler called HangoverCompare 🍔-->
-<$button>Test Button (updatetids):
+<!--🍔 The test button will POST tids as Json, then update the SENTyn field of posted tids 🍔-->
+<$button>Test Button (sendtids):
 <$hellojson command="sendtids" filter="[tag[example]]" url="https://YOUR_ENDPOINT_HERE"/>
 </$button>
 
