@@ -74,6 +74,13 @@ helloJson widget
         this.url = this.getAttribute("url");
         var instructions = `testing ${this.COMMAND} check SENTyn field in the tids you filtered for...`;
       }
+
+      else if (this.COMMAND == "ai-reply") {
+        // command="sendtids" params: filter, url
+        this.prompt = this.getAttribute("prompt");
+        this.creds = this.getAttribute("creds");
+        var instructions = `testing ${this.COMMAND}, check for a reply tagged with your prompt tid...`;
+      }
       
       return instructions;
 };
@@ -143,17 +150,33 @@ helloJson widget
       //  EXAMPLE- SENDTIDS: send tiddlers (from filter) to a remote endpoint as json
       // ******************************************************************************** //
   
-  else if (COMMAND == "sendtids") {
-      var FILT = this.filt;
-      var URL = this.url;
-      var these_tids = $tw.wiki.filterTiddlers(FILT);
-      console.dir(these_tids);
-      
-      var heyJson = new HeyJson();
-      await heyJson.sendTidsByFilter(URL, these_tids);
-      var msg = "sent tids, check remote endpoint";
-      return msg
-  } 
+      else if (COMMAND == "sendtids") {
+        var FILT = this.filt;
+        var URL = this.url;
+        var these_tids = $tw.wiki.filterTiddlers(FILT);
+        console.dir(these_tids);
+        
+        var heyJson = new HeyJson();
+        await heyJson.sendTidsByFilter(URL, these_tids);
+        var msg = "sent tids, check remote endpoint";
+        return msg
+    } 
+
+   // ******************************************************************************** //
+      //  EXAMPLE- OPENAI-REPLY: get a single reply from OpenAI's API
+      // ******************************************************************************** //
+  
+      else if (COMMAND == "ai-reply") {
+        var prompt_tid = this.prompt;
+        console.log("prompt tid: " + prompt_tid);
+        var creds_tid = this.creds;
+        console.log("creds tid: " + creds_tid);
+        var heyJson = new HeyJson();
+        await heyJson.getAIreply(creds_tid, prompt_tid);
+        var msg = "check the reply field of the tid you used as a prompt";
+        return msg
+    } 
+
   // END OF EXAMPLES // 
    /// CATCH TEST COMMAND TO CONFIRM PLUGIN IS INSTALLED // 
     else if (COMMAND == "test" || COMMAND == "hello" || COMMAND == undefined || COMMAND == "") {

@@ -153,3 +153,29 @@ Inspired by [OokTech](https://github.com/OokTech), this example grabs tiddlers b
 Thanks to OokTech I have been using this approach successfully for 2 years to POST data out of TiddlyWiki to remote servers... usually I just use a single-file js macro a la [this gist](https://gist.github.com/philwonski/1a015b555ac8b858c2949d7940ca8880) ... I have slapped it into the HelloJson repo for convenience. 
 
 Note that if you send a shadow tiddler with your filter (as I have with my filter `[tag[example]]`, which are all shadows), you won't see the update to the tiddler's SENTyn field. You may not notice this since you have to open the tiddler (and thus make it non-shadow) to add your own endpoint. 
+
+## 3. AI-Reply (OpenAI)
+
+*Purpose*
+
+For sending a simple ask-reply request to an OpenAI model. 
+
+*Usage*
+
+`<$hellojson command="ai-reply" prompt="prompt1" creds="creds1"/>`
+
+- Where `prompt1` is the name of a tiddler containing the prompt, model, and optional system message.
+- Where `creds1` is the name of a tiddler containing your OpenAI API key.
+
+*Demo*
+
+[https://philwonski.github.io/twplugins-hello-json-advanced/#test-openai](https://philwonski.github.io/twplugins-hello-json-advanced/#test-openai)
+
+*More Info*
+
+This is a simple POC I will use to demonstrate other OpenAI tie-ins to TiddlyWiki. In this case, the widget only handles a single call and a single response -- but the Chat Completions API can easily handle an array of prompts instead, such as from a conversation. In TiddlyWiki, we can handle this array in the frontend Wikitext using the "Journal" tiddlers concept. This makes a full chatbot experience possible in TiddlyWiki. 
+
+// LangchainWiki // 
+
+Personally I am less interested in TiddlyWiki as a Chat-GPT clone, and more interested in ingesting and processing data with TiddlyWiki. In this way, we can use the built-in TiddlyWiki tools for storing, retrieving and manipulating data to create Langchain-style operations, meaning making successive calls to the AI and processing the results.
+

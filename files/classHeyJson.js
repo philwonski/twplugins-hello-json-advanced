@@ -9,13 +9,15 @@
   HeyJson = class HeyJson {
     constructor(hey = {}) {
       this.runName = this.runName.bind(this);
+      // PINNED HANGOVER EXAMPLE
       this.runFetchHangoverCompare = this.runFetchHangoverCompare.bind(this);
       this.twMakeTid = this.twMakeTid.bind(this);
       this.runFetch = this.runFetch.bind(this);
       this.runFetchWpPosts = this.runFetchWpPosts.bind(this);
       this.tidsByFilter = this.tidsByFilter.bind(this);
       this.sendTidsByFilter = this.sendTidsByFilter.bind(this);
-      this.runMsg = this.runMsg.bind(this);
+      this.getAIreply = this.getAIreply.bind(this);
+      this.zrunMsg = this.zrunMsg.bind(this);
       this.hey = hey;
     }
 
@@ -146,6 +148,8 @@
       payload = JSON.stringify(tid_objs);
       url = url;
       try {
+        // per HelloJson guidelines, this request should really be via a promise from a helper file
+        // but i had the below handy from @Ooktech so I'm using it for now
         formRequest = new XMLHttpRequest();
         formRequest.open('POST', url, true);
         formRequest.setRequestHeader('content-type', 'application/json');
@@ -172,7 +176,64 @@
       }
     }
 
-    runMsg() {
+    getAIreply(creds_tid, msg_tid) {
+      var apikey, auth, creds_obj, e, formRequest, model, msg, msg_obj, msg_payload, msgs, payload, pl, sysmsg, sysmsg_payload, url;
+      
+      // grab the api key from the creds tiddler
+      creds_obj = $tw.wiki.getTiddler(creds_tid);
+      apikey = creds_obj.fields.apikey;
+      // console.log(apikey)
+
+      // grab the message from the msg tiddler
+      // prepare the payload like OpenAI wants it
+      msg_obj = $tw.wiki.getTiddler(msg_tid);
+      msg = msg_obj.fields.msg;
+      msg_payload = {};
+      msg_payload["role"] = "user";
+      msg_payload["content"] = msg;
+      sysmsg = msg_obj.fields.sysmsg;
+      sysmsg_payload = {};
+      sysmsg_payload["role"] = "system";
+      sysmsg_payload["content"] = sysmsg;
+      model = msg_obj.fields.model;
+      // msg = "hello there"
+      url = "https://api.openai.com/v1/chat/completions";
+      msgs = [sysmsg_payload, msg_payload];
+      pl = {};
+      pl.model = model;
+      pl.messages = msgs;
+      payload = JSON.stringify(pl);
+      auth = "Bearer " + apikey;
+      try {
+        // per HelloJson guidelines, this request should really be via a promise from a helper file
+        // but i had the below handy from @Ooktech so I'm using it for now
+        // now send the request to OpenAI
+        formRequest = new XMLHttpRequest();
+        formRequest.open('POST', url, true);
+        formRequest.setRequestHeader('content-type', 'application/json');
+        formRequest.setRequestHeader('Authorization', auth);
+        formRequest.send(payload);
+        return formRequest.onreadystatechange = function() {
+          var reply, response;
+          if (formRequest.readyState === 4 && formRequest.status === 200) {
+            response = JSON.parse(formRequest.responseText);
+            console.dir(response);
+            reply = response.choices[0].message.content;
+            $tw.wiki.setText(msg_tid, "reply", "", reply);
+            return reply;
+          } else {
+            $tw.wiki.setText(msg_tid, "reply", "", "it didn\'t work");
+            return "error getting AI reply (maybe from remote, check nw console) in getAIreply method";
+          }
+        };
+      } catch (error) {
+        e = error;
+        console.log(e);
+        return "error getting AI reply in getAIreply method";
+      }
+    }
+
+    zrunMsg() {
       var msg;
       // just a test method
       msg = "hello there";

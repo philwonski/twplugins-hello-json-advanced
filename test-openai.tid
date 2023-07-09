@@ -1,0 +1,57 @@
+title: test-openai
+created: 20230708164533000
+modified: 20230708164533333
+tags: example
+type: text/vnd.tiddlywiki
+
+!! Example
+
+Basic OpenAI call to the chat completions endpoint. Enter your API key and the prompt you want to use, and click the button to see the results.
+
+The only wikitext that is required to make the call and catch the reply is like this:
+
+```
+<$button>Test Button (click me):
+<$hellojson command="ai-reply" prompt="prompt1" creds="creds1"/>
+</$button>
+```
+
+Where prompt1 is a tiddler with the following fields:
+
+|''model'' |the OpenAI model you want to use |
+|''sysmsg'' |this is an instructional prompt you can optionally provide ahead of your actual prompt |
+|''msg'' |this is your actual message for the Chat, for which you want a reply |
+
+And the creds1 tiddler has the following fields:
+
+|''apikey'' |your OpenAI API <a href="https://platform.openai.com/account/">key</a> |
+
+
+In this basic example, the widget will just drop the reply in the `reply` field of whatever tiddler has the prompt. So below we will transclude the reply with `{{promt1!!reply}}`. 
+
+I also inject the system message and the model to make the demo quicker to try out.
+
+Enter your OpenAI API key:<br>
+<$edit-text tiddler="creds1" field="apikey" size="50"/>
+<br><br>
+Enter your chat prompt:<br>
+<$edit-text tiddler="prompt1" field="msg" tag="textarea"/>
+<br><br>
+
+<!--🍔 The test button will update the reply field of the prompt tid 🍔-->
+<$button>Test Button (click me):
+<$action-setfield $tiddler="prompt1" $field="model" $value="gpt-4-0613"/>
+<$action-setfield $tiddler="prompt1" $field="sysmsg" $value="You are a helpful assistant."/>
+<$hellojson command="ai-reply" prompt="prompt1" creds="creds1"/>
+</$button>
+
+
+<hr>
+
+<!--🍟 Show the results by transcluding prompt1!!reply 🍟-->
+
+//Reply//
+
+
+{{prompt1!!reply}}
+
