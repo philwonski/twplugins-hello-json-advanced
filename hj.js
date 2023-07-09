@@ -79,7 +79,7 @@ helloJson widget
         // command="sendtids" params: filter, url
         this.prompt = this.getAttribute("prompt");
         this.creds = this.getAttribute("creds");
-        var instructions = `testing ${this.COMMAND}, check for a reply tagged with your prompt tid...`;
+        var instructions = `testing ${this.COMMAND}, please wait for reply...`;
       }
       
       return instructions;
