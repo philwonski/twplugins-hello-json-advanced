@@ -154,7 +154,7 @@ Thanks to OokTech I have been using this approach successfully for 2 years to PO
 
 Note that if you send a shadow tiddler with your filter (as I have with my filter `[tag[example]]`, which are all shadows), you won't see the update to the tiddler's SENTyn field. You may not notice this since you have to open the tiddler (and thus make it non-shadow) to add your own endpoint. 
 
-## 3. AI-Reply (OpenAI)
+## 4. AI-Reply (OpenAI)
 
 *Purpose*
 
